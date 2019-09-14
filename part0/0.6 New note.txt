@@ -1,0 +1,10 @@
+note over browser:
+User clicks on Save button on entering the note.
+Browsers executes js code on form submit event trigger, creates a new note with data and
+pushes the note with current date into the notes array and calls redraw function
+that re-renders notes to display
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa Requestbody: {"content":"test spa","date":"2019-09-14T08:31:48.830Z"}
+server-->browser: {"message":"note created"}
+

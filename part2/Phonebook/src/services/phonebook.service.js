@@ -10,16 +10,13 @@ const create = newObject => {
     return axios.post(baseUrl, newObject);
 }
 
-/* const update = (id, newObject) => {
+const update = (id, newObject) => {
     return axios.put(`${baseUrl}/${id}`, newObject)
-} */
+}
 
 const deletePerson = (id) => {
     const promise = axios.delete(`${baseUrl}/${id}`)
-    return promise.then(console.log('deleted'))
-        .catch(error => {
-            console.log('fail', error)
-        })
+    return promise;
 }
 
-export default { getAll, create, deletePerson }
+export default { getAll, create, update,deletePerson }

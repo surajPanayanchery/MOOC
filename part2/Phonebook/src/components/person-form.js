@@ -11,7 +11,8 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
         if (match) { alert(`${newName} has been alread added`) }
         else {
             phoneService.create({ name: newName, number: newPhone })
-                .then(() => phoneService.getAll().then((data) => { setMessage('Successfully Added'); setType('success'); setPersons(data); }));
+                .then(() => phoneService.getAll().then((data) => { setMessage('Successfully Added'); setType('success'); setPersons(data); }))
+                .catch((err)=>{console.log(err.response);setType('error'); setMessage(err.response.data.error); })
         }
     }
 

@@ -12,7 +12,7 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
         else {
             phoneService.create({ name: newName, number: newPhone })
                 .then(() => phoneService.getAll().then((data) => { setMessage('Successfully Added'); setType('success'); setPersons(data); }))
-                .catch((err)=>{console.log(err.response);setType('error'); setMessage(err.response.data.error); })
+                .catch((err) => { console.log(err.response); setType('error'); window.scrollTo(0,0); setMessage(err.response.data.error); })
         }
     }
 
@@ -26,18 +26,23 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
     const handleMobileChange = (event) => { event.preventDefault(); setNewPhone(event.target.value); }
 
     return (
-        <div>
-            Add A new person
-            <form onSubmit={addNewPerson}>
-                <div>
-                    name: <input value={newName} type="text" onChange={handleNoteChange} />
-                    mobile: <input type="text" value={newPhone} mask="00 000 00000" onChange={handleMobileChange} />
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                    <input type="button" onClick={() => updatePerson()} value="Update" />
-                </div>
-            </form>
+        <div className="person-form">
+            <div className="custom-border">
+                <h3>Add A new person</h3>
+                <form onSubmit={addNewPerson}>
+                    <div className="custom-input">
+                        name: <input value={newName} type="text" onChange={handleNoteChange} />
+                    </div>
+                    <div className="custom-input">
+                        mobile: <input type="text" value={newPhone} mask="00 000 00000" onChange={handleMobileChange} />
+                    </div>
+
+                    <div className="button-group">
+                        <button className="custom-buttom" type="submit">add</button>
+                        <input type="button" className="custom-buttom" onClick={() => updatePerson()} value="Update" />
+                    </div>
+                </form>
+            </div>
         </div>
     )
 

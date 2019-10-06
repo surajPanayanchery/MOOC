@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: mediumaquamarine;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -36,6 +37,66 @@ h1.error{
   color:red;
 }
 
+.custom-head{
+  padding: 20px;
+  text-align: center;
+  background-color:burlywood;
+  color:purple;
+  font-size:20px;
+  font-weight:bold;
+  border: 2px solid red;
+}
+
+.custom-list-item{
+  display: flex;
+  justify-content: space-between;
+}
+.list-content-item{
+  min-width:30px;
+  align-self: center;
+}
+.custom-content{
+  text-align: center;
+  padding: 20px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: blueviolet;  
+}
+.button-group{
+  text-align: center;
+}
+
+.person-form{
+  display:flex;
+  justify-content: center;  
+  margin: 20px 0px;
+}
+
+.custom-filter{
+  margin:10px 0px;
+}
+
+.custom-border{
+  padding: 0px 30px;
+  border:1px dashed crimson;
+  border-radius: 10px;
+}
+
+.custom-input{
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-buttom{
+  text-decoration: none;
+  background-color: blanchedalmond;
+  padding: 2px 5px;
+  border:2px solid white;
+  border-radius:3px;
+  margin: 10px;
+}
 
 button.clr-button{
   border: 1px solid black;

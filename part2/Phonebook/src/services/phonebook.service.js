@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'https://fierce-stream-06910.herokuapp.com/api'
+// const baseUrl = 'https://fierce-stream-06910.herokuapp.com/api'
+const baseUrl = 'http://localhost:9002/api'
 
 const getAll = () => {
     const promise = axios.get(baseUrl+'/persons');

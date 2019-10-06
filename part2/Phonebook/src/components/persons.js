@@ -19,10 +19,21 @@ export const Persons = ({ filterKey, persons, setPersons, setMessage, setType, s
     }
     const showPersons = () => personsToShow().map(person => {
         return (
-            <li key={person.id}>
-                {person.name}   {person.number}
-                <button onClick={() => deleteThisPerson(person.id)}>delete</button>
-                <button onClick={() => updatePerson(person)}>Update</button>
+            <li className="custom-list-item" key={person.id}>
+                <div className="list-content-item" >
+                    {person.name}
+                </div>
+                <div className="list-content-item" >
+                    {person.number}
+                </div>
+
+                <div>
+                    <span className="list-content-item"><button className="custom-buttom" onClick={() => deleteThisPerson(person.id)}>delete</button></span>
+                    <span className="list-content-item"><button className="custom-buttom" onClick={() => updatePerson(person)}>Update</button></span>
+                </div>
+
+
+
             </li>)
     })
     const personsToShow = () => filterKey ? persons.filter(person => person.name.includes(filterKey)) : persons;

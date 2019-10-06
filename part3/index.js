@@ -1,10 +1,14 @@
 console.log('helo');
 const express = require('express');
 const app = express();
+require('dotenv').config();
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const morgan = require('morgan');
+const Person = require('./models/person');
+
 morgan.token('data', function (req, res) { return JSON.stringify(req.body) })
+app.use(express.static('build'))
 app.use(cors());
 app.use(bodyParser.json());
 app.use(morgan(function (tokens, req, res) {
@@ -14,26 +18,29 @@ app.use(morgan(function (tokens, req, res) {
         tokens.status(req, res),
         tokens.res(req, res, 'content-length'), '-',
         tokens['response-time'](req, res), 'ms',
-        tokens.data(req,res)
+        tokens.data(req, res)
 
 
     ].join(' ')
 }));
 
-let persons = [
-    { id: 1, name: 'Person 1', number: "040-123456" },
-    { id: 2, name: 'Person 2', number: "041-123456" },
-    { id: 3, name: 'Person 3', number: "042-123456" }
-]
+
+let persons = [];
 
 // To get the info of the webpage
-app.get('/info', (req, res) => {
+app.get('/api/info', (req, res) => {
+    Person.find({})
+        .then(personsRes => { persons = personsRes; })
+        .catch(err => console.log(err.message));
     res.send(`Phonebook has info for ${persons.length} people <br> <br>${new Date()}`);
 })
 
 //To get all the persons in the DB
 app.get('/api/persons', (req, res) => {
-    res.json(persons);
+    Person.find({})
+        .then(personsRes => { persons = personsRes; res.json(personsRes); })
+        .catch(err => console.log(err.message));
+
 })
 
 //To get the specified person
@@ -54,6 +61,7 @@ app.delete('/api/person/:id', (req, res) => {
             console.log(persons);
             persons = persons.filter(person => person.id !== Number(req.params.id))
             console.log(persons);
+            mongoose.connection.close()
             res.send(persons)
         }
     }
@@ -68,20 +76,29 @@ app.post('/api/person', (req, res) => {
         const person = req.body;
         if (!alreadExists(req)) {
             person.id = generateId();
-            persons.push(person);
-            res.json(persons);
+            savePerson(person);
         }
         else {
             res.status(400).json({
                 error: "Name or Number already exists"
-            })
+            })            
         }
 
     }
 
 })
 
+const savePerson = (personData) => {
+    console.log('DBConected');
+    const person = new Person(personData);
+
+    person.save().then(response => {
+        console.log('person saved!')
+    }).catch(err => { console.log(err.message) })
+}
+
 const alreadExists = (req) => {
+    console.log(persons);
     if ([...persons.map(person => person.name)].indexOf(req.body.name) === -1) {
         {
             if ([...persons.map(person => person.number)].indexOf(req.body.number) === -1) {
@@ -99,7 +116,7 @@ const generateId = () => {
 
 
 
-const PORT = 9001;
+const PORT = process.env.PORT || 9002;
 
 
 app.listen(PORT, () => {

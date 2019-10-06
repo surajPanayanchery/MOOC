@@ -9,7 +9,7 @@ export const Notification = ({ message, type, setMessage, setType }) => {
 
     return (
         <div>
-            {message && <h1 className={type}><div className="header-content">{message}</div> <button className="clr-button" onClick={() => {clearMessage()}}>Clear</button></h1>}
+            {message && <h1 className={type}><div className="header-content">{message}</div> <button className="custom-buttom" onClick={() => {clearMessage()}}>Clear</button></h1>}
 
         </div>)
 }

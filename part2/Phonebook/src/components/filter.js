@@ -6,8 +6,8 @@ const Filter = ({ setFilter }) => {
     const filterKey = (event) => { event.preventDefault(); setFilter(event.target.value); }
 
     return (
-        <div>
-            filter shown with <input onChange={filterKey} />
+        <div class="custom-filter">
+           Filter with name <input onChange={filterKey} />
         </div>
     )
 

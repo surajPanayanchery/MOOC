@@ -11,7 +11,7 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
         if (match) { alert(`${newName} has been alread added`) }
         else {
             phoneService.create({ name: newName, number: newPhone })
-                .then(() => { setNewName(''); setNewNumber(''); console.log('getAll'); phoneService.getAll().then((data) => {window.scrollTo(0, 0); setMessage('Successfully Added'); setType('success'); setPersons(data); }) })
+                .then(() => { setNewName(''); setNewPhone(''); console.log('getAll'); phoneService.getAll().then((data) => {window.scrollTo(0, 0); setMessage('Successfully Added'); setType('success'); setPersons(data); }) })
                 .catch((err) => { console.log(err.response); setType('error'); window.scrollTo(0, 0); setMessage(err.response.data.error); })
         }
     }

@@ -14,7 +14,6 @@ const App = () => {
     const [message, setMessage] = useState('');
     const [type, setType] = useState('');
     const [index, setIndex] = useState();
-    const [show, setShow] = useState(false);
 
     const hook = () => {
         phoneService.getAll().then(data => { console.log(data); setPersons(data) });
@@ -25,26 +24,26 @@ const App = () => {
 
     return (
         <div>
-            <div className="custom-head" onClick={() => setShow(!show)}>Welcome to Universal Phone Directory</div>
+            <div className="custom-head">Welcome to Universal Phone Directory</div>
 
+            {/*  Alert Messages */}
             <Notification message={message} type={type} setMessage={setMessage} setType={setType} />
-            {show === true && (
-                <div>
-                    <div className="custom-content">
-                        <div className="left-tab">
-                            <h2>Phonebook</h2>
-                            <Filter setFilter={setFilter} />
-                        </div>
-                        <div className="center-tab">
-                            <h2>Numbers</h2>
-                            <Persons filterKey={filter} persons={persons} setPersons={setPersons} setMessage={setMessage} setType={setType} setNewName={setNewName} setNewPhone={setNewPhone} setIndex={setIndex} />
-                        </div>
-                    </div>
-                    <div className="right-tab">
-                        <PersonForm persons={persons} setPersons={setPersons} newName={newName} newPhone={newPhone} setNewName={setNewName} setNewPhone={setNewPhone} setMessage={setMessage} setType={setType} index={index} />
-                    </div>
-                    
-                </div>)}
+            <div className="custom-content">
+                {/* Filter */}
+                <div className="left-tab">
+                    <h2>Phonebook</h2>
+                    <Filter setFilter={setFilter} />
+                </div>
+                {/* Directory */}
+                <div className="center-tab">
+                    <h2>Numbers</h2>
+                    <Persons filterKey={filter} persons={persons} setPersons={setPersons} setMessage={setMessage} setType={setType} setNewName={setNewName} setNewPhone={setNewPhone} setIndex={setIndex} />
+                </div>
+            </div>
+            {/* Add New number */}
+            <div className="right-tab">
+                <PersonForm persons={persons} setPersons={setPersons} newName={newName} newPhone={newPhone} setNewName={setNewName} setNewPhone={setNewPhone} setMessage={setMessage} setType={setType} index={index} />
+            </div>
         </div>
     )
 }

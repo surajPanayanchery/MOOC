@@ -76,12 +76,16 @@ app.post('/api/person', (req, res) => {
         const person = req.body;
         if (!alreadExists(req)) {
             person.id = generateId();
-            savePerson(person);
+            savePerson(person).then(() => res.send()).catch(() => {
+                res.status(400).json({
+                    error: "Could not save in DB"
+                })
+            });
         }
         else {
             res.status(400).json({
                 error: "Name or Number already exists"
-            })            
+            })
         }
 
     }
@@ -92,8 +96,8 @@ const savePerson = (personData) => {
     console.log('DBConected');
     const person = new Person(personData);
 
-    person.save().then(response => {
-        console.log('person saved!')
+    return person.save().then(response => {
+        response.send('success');
     }).catch(err => { console.log(err.message) })
 }
 

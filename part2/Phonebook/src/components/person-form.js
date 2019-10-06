@@ -11,16 +11,16 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
         if (match) { alert(`${newName} has been alread added`) }
         else {
             phoneService.create({ name: newName, number: newPhone })
-                .then(() => phoneService.getAll().then((data) => { setMessage('Successfully Added'); setType('success'); setPersons(data); }))
-                .catch((err) => { console.log(err.response); setType('error'); window.scrollTo(0,0); setMessage(err.response.data.error); })
+                .then(() => { setNewName(''); setNewNumber(''); console.log('getAll'); phoneService.getAll().then((data) => {window.scrollTo(0, 0); setMessage('Successfully Added'); setType('success'); setPersons(data); }) })
+                .catch((err) => { console.log(err.response); setType('error'); window.scrollTo(0, 0); setMessage(err.response.data.error); })
         }
     }
 
     const updatePerson = () => {
         console.log(index);
         phoneService.update(index, { name: newName, number: newPhone })
-            .then(() => phoneService.getAll().then((data) => { setMessage('Successfully Updated'); setType('updated'); setPersons(data); }))
-            .catch(() => { setType('error'); setMessage('Cannot find person in DB. Please contact IT Helpdesk'); });
+            .then(() => phoneService.getAll().then((data) => { window.scrollTo(0, 0); setMessage('Successfully Updated'); setType('updated'); setPersons(data); }))
+            .catch(() => { window.scrollTo(0, 0); setType('error'); setMessage('Cannot find person in DB. Please contact IT Helpdesk'); });
     }
     const handleNoteChange = (event) => { event.preventDefault(); setNewName(event.target.value); }
     const handleMobileChange = (event) => { event.preventDefault(); setNewPhone(event.target.value); }

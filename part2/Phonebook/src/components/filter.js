@@ -6,7 +6,7 @@ const Filter = ({ setFilter }) => {
     const filterKey = (event) => { event.preventDefault(); setFilter(event.target.value); }
 
     return (
-        <div class="custom-filter">
+        <div className="custom-filter">
            Filter with name <input onChange={filterKey} />
         </div>
     )

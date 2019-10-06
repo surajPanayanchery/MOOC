@@ -5,8 +5,8 @@ export const Persons = ({ filterKey, persons, setPersons, setMessage, setType, s
     const deleteThisPerson = (id) => {
         if (id !== undefined) {
             window.confirm('Do you want to delete'); phoneService.deletePerson(id)
-                .then(() => { setMessage('Successfully Deleted'); setType('deleted'); phoneService.getAll().then(data => setPersons(data)) })
-                .catch(() => { setType('error'); setMessage('Cannot find person in DB. Please contact IT Helpdesk'); });
+                .then(() => { window.scrollTo(0, 0); setMessage('Successfully Deleted'); setType('deleted'); phoneService.getAll().then(data => setPersons(data)) })
+                .catch(() => {window.scrollTo(0, 0); setType('error'); setMessage('Cannot find person in DB. Please contact IT Helpdesk'); });
         }
     }
 

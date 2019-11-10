@@ -31,10 +31,10 @@ export const PersonForm = ({ persons, setPersons, newName, newPhone, setNewName,
                 <h3>Add A new person</h3>
                 <form onSubmit={addNewPerson}>
                     <div className="custom-input">
-                        name: <input value={newName} type="text" onChange={handleNoteChange} />
+                        Name: <input value={newName} type="text" onChange={handleNoteChange} />
                     </div>
                     <div className="custom-input">
-                        mobile: <input type="text" value={newPhone} mask="00 000 00000" onChange={handleMobileChange} />
+                        Mobile: <input type="text" value={newPhone} onChange={handleMobileChange} />
                     </div>
 
                     <div className="button-group">

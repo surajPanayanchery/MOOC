@@ -28,7 +28,7 @@ export const Persons = ({ filterKey, persons, setPersons, setMessage, setType, s
                 </div>
 
                 <div>
-                    <span className="list-content-item"><button className="custom-buttom" onClick={() => deleteThisPerson(person.id)}>delete</button></span>
+                    <span className="list-content-item"><button className="custom-buttom" onClick={() => deleteThisPerson(person.id)}>Delete</button></span>
                     <span className="list-content-item"><button className="custom-buttom" onClick={() => updatePerson(person)}>Update</button></span>
                 </div>
 

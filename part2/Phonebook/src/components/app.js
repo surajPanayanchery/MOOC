@@ -23,26 +23,25 @@ const App = () => {
     useEffect(hook, [])
 
     return (
-        <div>
-            <div className="custom-head">Welcome to Universal Phone Directory</div>
-
+        <div className="custom-body">
+            <div className="custom-heading">Welcome to Universal Phone Directory</div>            
+            {/* Add New number */}
+            <div>
+                <PersonForm persons={persons} setPersons={setPersons} newName={newName} newPhone={newPhone} setNewName={setNewName} setNewPhone={setNewPhone} setMessage={setMessage} setType={setType} index={index} />
+            </div>
             {/*  Alert Messages */}
             <Notification message={message} type={type} setMessage={setMessage} setType={setType} />
             <div className="custom-content">
                 {/* Filter */}
-                <div className="left-tab">
+                <div>
                     <h2>Phonebook</h2>
                     <Filter setFilter={setFilter} />
                 </div>
                 {/* Directory */}
-                <div className="center-tab">
+                <div>
                     <h2>Numbers</h2>
                     <Persons filterKey={filter} persons={persons} setPersons={setPersons} setMessage={setMessage} setType={setType} setNewName={setNewName} setNewPhone={setNewPhone} setIndex={setIndex} />
                 </div>
-            </div>
-            {/* Add New number */}
-            <div className="right-tab">
-                <PersonForm persons={persons} setPersons={setPersons} newName={newName} newPhone={newPhone} setNewName={setNewName} setNewPhone={setNewPhone} setMessage={setMessage} setType={setType} index={index} />
             </div>
         </div>
     )

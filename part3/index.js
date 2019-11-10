@@ -53,19 +53,18 @@ app.get('/api/person/:id', (request, response) => {
 
 //To delete the person
 app.delete('/api/person/:id', (req, res) => {
+    console.log(req.params);
     if (req.params.id) {
         if ([...persons.map(person => person.id)].indexOf(Number(req.params.id)) === -1) {
             res.status(400).json({ error: "Person doesnot exists" });
         }
-        else {
-            console.log(persons);
-            persons = persons.filter(person => person.id !== Number(req.params.id))
-            console.log(persons);
-            mongoose.connection.close()
-            res.send(persons)
+        else {            
+            Person.deleteOne(persons.filter(person => person.id === Number(req.params.id))[0]).then(pRes => {persons=pRes;console.log(pRes);res.json(persons)}).catch(err => console.log(err.message));
+            res.send(persons);
         }
     }
     else {
+        console.log('ers');
         res.status(404);
     }
 })
